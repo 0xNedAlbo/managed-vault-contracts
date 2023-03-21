@@ -5,7 +5,7 @@ import "forge-std/Test.sol";
 
 import "../mocks/MockERC20.sol";
 
-import "../../src/vaults/ManagedVault.sol";
+import "@src/ManagedVault.sol";
 
 contract ManagedVaultUtils is Test {
     ManagedVault public vault;
