@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import "forge-std/Test.sol";
 
-import "../mocks/MockERC20.sol";
+import "@mock-tokens/MockERC20.sol";
 
 import "@src/ManagedVault.sol";
 
@@ -33,7 +33,7 @@ contract ManagedVaultUtils is Test {
         bob = makeAddr("bob");
         charles = makeAddr("charles");
 
-        asset = new MockERC20("Asset Token", "ASS");
+        asset = new MockERC20("Asset Token", "ASS", 18);
         asset.mint(alice, 100000 ether);
         asset.mint(bob, 100000 ether);
         asset.mint(charles, 100000 ether);

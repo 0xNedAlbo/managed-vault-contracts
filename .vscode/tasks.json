@@ -1,0 +1,26 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"command": "forge test -vvv",
+			"problemMatcher": [],
+			"label": "managed-vault-contracts: forge test",
+			"detail": "Run forge test command for managed-vault-contracts project"
+		},
+		{
+			"type": "shell",
+			"command": "forge test -vvv --mt \"_only\"",
+			"problemMatcher": [],
+			"label": "managed-vault-contracts: forge test 'only'",
+			"detail": "Run forge test command for managed-vault-contracts with \"_only\" suffix"
+		},
+		{
+			"type": "shell",
+			"command": "forge script scripts/deployLocal.sol:DeployLocal --fork-url http://localhost:8545 --broadcast",
+			"problemMatcher": [],
+			"label": "managed-vault-contracts: deploy on localhost",
+			"detail": "Deploy Managed Vaults on localhost"
+		}
+	]
+}

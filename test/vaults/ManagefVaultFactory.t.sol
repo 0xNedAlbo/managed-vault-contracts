@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import "forge-std/Test.sol";
 
-import "../mocks/MockERC20.sol";
+import "@mock-tokens/MockERC20.sol";
 
 import "@src/ManagedVaultFactory.sol";
 import "@src/ManagedVault.sol";
@@ -21,7 +21,7 @@ contract ManagedSwapFactoryTest is Test {
         deployer = makeAddr("deployer");
         alice = makeAddr("alice");
 
-        asset = new MockERC20("Token A", "TOKA");
+        asset = new MockERC20("Token A", "TOKA", 18);
 
         vm.startPrank(deployer);
         vault = new ManagedVault();

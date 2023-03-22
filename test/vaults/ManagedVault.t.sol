@@ -5,7 +5,7 @@ import "forge-std/Test.sol";
 
 import "@openzeppelin/contracts/utils/math/Math.sol";
 
-import "../mocks/MockERC20.sol";
+import "@mock-tokens/MockERC20.sol";
 import "../utils/ManagedVaultUtils.sol";
 
 contract ManagedVaultTest is ManagedVaultUtils {
