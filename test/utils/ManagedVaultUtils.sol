@@ -61,11 +61,11 @@ contract ManagedVaultUtils is Test {
         vm.startPrank(alice);
 
         // Adding shareholders
-        vault.whitelistShareholder(bob);
+        vault.addShareholder(bob);
         asset.approve(address(vault), 10000 ether);
         assertTrue(vault.isShareholder(bob), "Bob is no shareholder");
 
-        vault.whitelistShareholder(charles);
+        vault.addShareholder(charles);
         asset.approve(address(vault), 10000 ether);
         assertTrue(vault.isShareholder(charles), "Charles is no shareholder");
 

@@ -79,9 +79,7 @@ contract ManagedVaultTest is ManagedVaultUtils {
         uint256 assetsToReceive = uint256(35 ether).mulDiv(vaultTotalAssets, vaultTotalShares, Math.Rounding.Down);
         bob_redeems_shares(35 ether);
         assertEq(
-            asset.balanceOf(bob),
-            bobsAssetBalance + assetsToReceive,
-            "Bob did not receive the correct amount of tokens"
+            asset.balanceOf(bob), bobsAssetBalance + assetsToReceive, "Bob did not receive the correct amount of tokens"
         );
         assertEq(
             asset.balanceOf(address(vault)),
@@ -137,7 +135,7 @@ contract ManagedVaultTest is ManagedVaultUtils {
         // Revoke shareholder role of charles
         assertTrue(vault.isShareholder(charles), "Charles is no shareholder");
         vm.prank(alice);
-        vault.revokeShareholder(charles);
+        vault.removeShareholder(charles);
         assertFalse(vault.isShareholder(charles), "Charles is still shareholder");
 
         // Deposit and mint for someone not whitlisted
@@ -185,35 +183,15 @@ contract ManagedVaultTest is ManagedVaultUtils {
         vault.setAssetsInUse(20 ether);
         assertEq(vault.assetsInUse(), 20 ether, "Vault has not 20 tokens in use");
 
-        // Alice increases vault total assets
-        vm.expectEmit(false, false, false, true);
-        emit ManagedVaultTest.Gains(20 ether);
-        vault.setTotalAssets(140 ether);
-        assertEq(vault.assetsInUse(), 40 ether, "Vault has not 40 tokens in use");
-        assertEq(vaultAssetBalance, asset.balanceOf(address(vault)), "Vaults asset balance is unchanged");
-
-        // Alice decreases vault total assets
-        vm.expectEmit(false, false, false, true);
-        emit ManagedVaultTest.Loss(10 ether);
-        vault.setTotalAssets(130 ether);
-        assertEq(vault.assetsInUse(), 30 ether, "Vault has not 30 tokens in use");
-        assertEq(vaultAssetBalance, asset.balanceOf(address(vault)), "Vaults asset balance is unchanged");
-
-        // Alice decreases vault total assets under current balance
-        vm.expectRevert(bytes("ManagedVault: Assets in use cannot be less than vault balance"));
-        vault.setTotalAssets(90 ether);
-
         // Check access rights.
         vm.stopPrank();
         vm.startPrank(bob);
-        vm.expectRevert(bytes("ManagedVault: Only allowed for manager"));
+        vm.expectRevert(bytes("ManagedVault: only allowed for keepers or manager"));
         vault.gains(10 ether);
-        vm.expectRevert(bytes("ManagedVault: Only allowed for manager"));
+        vm.expectRevert(bytes("ManagedVault: only allowed for keepers or manager"));
         vault.loss(10 ether);
-        vm.expectRevert(bytes("ManagedVault: Only allowed for manager"));
+        vm.expectRevert(bytes("ManagedVault: only allowed for keepers or manager"));
         vault.setAssetsInUse(10 ether);
-        vm.expectRevert(bytes("ManagedVault: Only allowed for manager"));
-        vault.setTotalAssets(10 ether);
     }
 
     function test_Use_and_Return_Assets() public {

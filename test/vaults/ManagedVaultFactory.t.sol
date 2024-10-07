@@ -8,7 +8,7 @@ import "@mock-tokens/MockERC20.sol";
 import "@src/ManagedVaultFactory.sol";
 import "@src/ManagedVault.sol";
 
-contract ManagedSwapFactoryTest is Test {
+contract ManagedVaultFactoryTest is Test {
     ManagedVault vault;
     ManagedVaultFactory factory;
 
