@@ -29,6 +29,7 @@ coverage :; forge coverage
 coverage-report :; forge coverage --report lcov 
 coverage-debug :; forge coverage --report debug 
 
+deploy-local :; forge script --unlocked --broadcast -f http://localhost:8545 scripts/deployLocal.sol:DeployLocal
 
 clean	:; forge clean
 	

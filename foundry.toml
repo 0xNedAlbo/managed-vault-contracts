@@ -16,11 +16,11 @@ script = "scripts"
 
 [etherscan]
 mainnet = { key = "${ETHERSCAN_API_KEY}" }
-
+arbitrum = { key = "${ARBISCAN_API_KEY}" }
 
 [rpc_endpoints]
 mainnet = "${ETH_RPC_URL}"
-
+arbitrum = "${ARBITRUM_RPC_URL}"
 
 [fmt]
 bracket_spacing = true
